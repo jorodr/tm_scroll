@@ -1,0 +1,27 @@
+name: Scroll
+type: theme
+description: Simple scrolling theme
+core: 8.x
+base theme: false
+
+libraries:
+    - scroll/common
+
+regions:
+    header: 'Header'
+    primary_menu: 'Primary menu'
+    secondary_menu: 'Secondary menu'
+    page_top: 'Page top'
+    page_bottom: 'Page bottom'
+    breadcrumb: 'Breadcrumb'
+    content: 'Content'
+    sidebar_first: 'Sidebar first'
+    sidebar_second: 'Sidebar second'
+    footer: 'Footer'
+    fixed: 'Fixed'
+    scroll_1: 'Scroll 1 - Top'
+    scroll_2: 'Scroll 2'
+    scroll_3: 'Scroll 3'
+    scroll_4: 'Scroll 4'
+    scroll_5: 'Scroll 5 - Bottom'
+    

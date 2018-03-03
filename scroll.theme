@@ -1,0 +1,74 @@
+<?php
+
+use Drupal\Component\Utility\Html;
+
+function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  
+  //ksm($form);
+  $form['scroll'] = array(
+    '#type' => 'details',
+    '#title' => t('Scroll theme settings'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['scroll']['scroll_1'] = array(
+    '#type' => 'details',
+    '#title' => 'Scroll 1',
+    '#description' => t('Settings for the top of the scroll regions'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['scroll']['scroll_1']['scroll_1_color'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Color:'),
+    '#description' => t('Type the hex code for the background color.'),
+    '#default_value' => theme_get_setting('scroll_1_color', 'scroll')
+  );
+  
+  $form['scroll']['scroll_1']['scroll_1_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Scroll 1 background image'),
+    '#description' => t('Please choose the image for the Scroll 1 region'),
+    '#default_value' => theme_get_setting('scroll_1_image', 'scroll'),
+    '#upload_location' => 'public://',
+  );
+  
+  $filename = drupal_get_path('theme', 'scroll') . '/scroll.theme';
+  $form_state->addBuildInfo('files', array($filename));
+  // Custom submit to save the file permenant.
+  $form['#submit'][] = 'scroll_settings_form_submit';
+}
+
+function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
+  $account = \Drupal::currentUser();
+  $values = $form_state->getValues();
+  if (isset($values["scroll_1_image"]) && !empty($values["scroll_1_image"])) {
+    // Load the file via file.fid.
+    if ($file = \Drupal\file\Entity\File::load($values["scroll_1_image"][0])) {
+      // Change status to permanent.
+      $file->setPermanent();
+      $file->save();
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage->add($file, 'user', 'user', $account->id());
+    }
+  }  
+}
+
+function scroll_preprocess_page(&$vars) {
+  $theme_path = base_path() . drupal_get_path('theme', 'scroll');
+  $fid = theme_get_setting('scroll_1_image', 'scroll');
+  $file = \Drupal\file\Entity\File::load($fid[0]);
+  if (!empty($file)) {
+    $uri = $file->getFileUri();
+    $image_path = file_create_url($uri);
+  }else{
+    $image_path = $theme_path . "/images/revu_1.jpg";
+  }
+  
+  $vars['scroll_1_image'] = $image_path;
+  
+  $scroll_1_color = theme_get_setting('scroll_1_color', 'scroll');
+  $vars['scroll_1_color'] = $scroll_1_color; 
+}
