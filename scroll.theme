@@ -22,6 +22,7 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#default_value' => theme_get_setting('fixed_image', 'scroll'),
     '#upload_location' => 'public://',
   );
+  
   /*
    * Generate 5 region details form elements
    */
@@ -56,7 +57,7 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
         0 => 'scroll',
         1 => 'fixed',
       ),
-      '#default_value' => 0,
+      '#default_value' =>  theme_get_setting('scroll_' . $i . '_attachment'),
     );
 
     $form['scroll']['scroll_' . $i]['scroll_' . $i . '_repeat'] = array(
@@ -68,58 +69,10 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
         2 => t('Repeat - X'),
         3 => t('Repeat - Y'),
       ),
-      '#default_value' => 0,
+      '#default_value' => theme_get_setting('scroll_' . $i . '_repeat'),
     );
   }
   // end of region details loop
-  /*
-   * 
-   
-  $form['scroll']['scroll_1'] = array(
-    '#type' => 'details',
-    '#title' => 'Scroll 1',
-    '#description' => t('Settings for the top of the scroll regions'),
-    '#collapsible' => TRUE,
-    '#collapsed' => TRUE,
-  );
-  
-  $form['scroll']['scroll_1']['scroll_1_height'] = array(
-    '#type' => 'textfield',
-    '#title' => t('Min Height:'),
-    '#description' => t('Type the minimal height of a Scroll 1 region.'),
-    '#default_value' => theme_get_setting('scroll_1_height', 'scroll')
-  );
-  
-  $form['scroll']['scroll_1']['scroll_1_image'] = array(
-    '#type' => 'managed_file',
-    '#title' => t('Scroll 1 background image'),
-    '#description' => t('Please choose the image for the Scroll 1 region'),
-    '#default_value' => theme_get_setting('scroll_1_image', 'scroll'),
-    '#upload_location' => 'public://',
-  );
-  
-  $form['scroll']['scroll_1']['scroll_1_attachment'] = array(
-    '#type' => 'radios',
-    '#title' => t('Background image attachment'),
-    '#options' => array(
-      0 => 'scroll',
-      1 => 'fixed',
-    ),
-    '#default_value' => 0,
-  );
-  
-  $form['scroll']['scroll_1']['scroll_1_repeat'] = array(
-    '#type' => 'radios',
-    '#title' => t('Background image repeat'),
-    '#options' => array(
-      0 => t('No-repeat'),
-      1 => t('Repeat'),
-      2 => t('Repeat - X'),
-      3 => t('Repeat - Y'),
-    ),
-    '#default_value' => 0,
-  );
-  */
   
   $filename = drupal_get_path('theme', 'scroll') . '/scroll.theme';
   $form_state->addBuildInfo('files', array($filename));
@@ -141,20 +94,6 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
       $file_usage->add($file, 'user', 'user', $account->id());
     }
   }
-  
-  /*
-  if (isset($values["scroll_1_image"]) && !empty($values["scroll_1_image"])) {
-    // Load the file via file.fid.
-    if ($file = \Drupal\file\Entity\File::load($values["scroll_1_image"][0])) {
-      // Change status to permanent.
-      $file->setPermanent();
-      $file->save();
-      $file_usage = \Drupal::service('file.usage');
-      $file_usage->add($file, 'user', 'user', $account->id());
-    }
-  }  
-   * 
-   */
 }
 
 function scroll_preprocess_page(&$vars) {
@@ -169,35 +108,42 @@ function scroll_preprocess_page(&$vars) {
       $image_path[$i] = file_create_url($uri);
     }
   }
-  /*
-  $fid = theme_get_setting('scroll_1_image', 'scroll');
-  $file = \Drupal\file\Entity\File::load($fid[0]);
-  if (!empty($file)) {
-    $uri = $file->getFileUri();
-    $image_path = file_create_url($uri);
-  }else{
-    $image_path = $theme_path . "/images/revu_1.jpg";
-  }
-  
-  $vars['scroll_1_image'] = $image_path;
-  * 
-   */
-  
+
   for($i=1; $i<=5; $i++) {
     if(isset($image_path[$i])) {
       $vars['scroll_' . $i . '_image'] = $image_path[$i];
     }    
   }
   
-  $scroll_1_height = theme_get_setting('scroll_1_height', 'scroll');
-  $scroll_2_height = theme_get_setting('scroll_2_height', 'scroll');
-  $scroll_3_height = theme_get_setting('scroll_3_height', 'scroll');
-  $scroll_4_height = theme_get_setting('scroll_4_height', 'scroll');
-  $scroll_5_height = theme_get_setting('scroll_5_height', 'scroll');
+  $scroll_region_heights = array();
+  $image_attachment = array();
+  $image_repeat = array();
   
-  $vars['scroll_1_height'] = $scroll_1_height;
-  $vars['scroll_2_height'] = $scroll_2_height;
-  $vars['scroll_3_height'] = $scroll_3_height;
-  $vars['scroll_4_height'] = $scroll_4_height;
-  $vars['scroll_5_height'] = $scroll_5_height;
+  for($i=1; $i<=5; $i++) {    
+    $vars[region_height][$i] = theme_get_setting('scroll_' . $i . '_height', 'scroll');
+    //image attachment propertirs for every region background image
+    $image_attachment[$i] = theme_get_setting('scroll_' . $i . '_attachment', 'scroll');
+    if($image_attachment[$i] == 0) {
+      $vars['background_attachment'][$i] = 'scroll';
+    }else{
+      $vars['background_attachment'][$i] = 'fixed';
+    } 
+    
+    //image repeat properties for every region background image
+    $image_repeat[$i] = theme_get_setting('scroll_' . $i . '_repeat', 'scroll');
+    switch($image_repeat[$i]) {
+      case 0:
+        $vars['background_repeat'][$i] = 'no-repeat';
+        break;
+      case 1:
+        $vars['background_repeat'][$i] = 'repeat';
+        break;
+      case 2:
+        $vars['background_repeat'][$i] = 'repeat-x';
+        break;
+      case 3:
+        $vars['background_repeat'][$i] = 'repeat-y';
+        break;
+    }
+  }
 }
