@@ -10,7 +10,71 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#title' => t('Scroll theme settings'),
     '#collapsible' => FALSE,
   );
-  
+  $form['scroll']['fixed'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Fixed region'),
+    '#collapsible' => FALSE,
+  );
+  $form['scroll']['fixed']['fixed_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Background image'),
+    '#description' => t('Background image of the Fixed region'),
+    '#default_value' => theme_get_setting('fixed_image', 'scroll'),
+    '#upload_location' => 'public://',
+  );
+  /*
+   * Generate 5 region details form elements
+   */
+  for($i=1; $i<=5;$i++) {
+    $form["scroll"]["scroll_" . $i] = array(
+      '#type' => 'details',
+      '#title' => 'Scroll ' . $i . ' Region detailss',
+      '#description' => t('Settings for the top of the scroll regions'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+    );
+    
+    $form['scroll']['scroll_' . $i]['scroll_' . $i . '_height'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Min Height:'),
+      '#description' => t('Type the minimal height of a Scroll ' . $i . ' region.'),
+      '#default_value' => theme_get_setting('scroll_' . $i . '_height', 'scroll')
+    );
+    
+    $form['scroll']['scroll_' . $i]['scroll_' . $i . '_image'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Scroll ' . $i . ' background image'),
+      '#description' => t('Please choose the image for the Scroll' . $i .'region'),
+      '#default_value' => theme_get_setting('scroll_' . $i . '_image', 'scroll'),
+      '#upload_location' => 'public://',
+    );
+    
+    $form['scroll']['scroll_' . $i]['scroll_' . $i . '_attachment'] = array(
+      '#type' => 'radios',
+      '#title' => t('Background image attachment'),
+      '#options' => array(
+        0 => 'scroll',
+        1 => 'fixed',
+      ),
+      '#default_value' => 0,
+    );
+
+    $form['scroll']['scroll_' . $i]['scroll_' . $i . '_repeat'] = array(
+      '#type' => 'radios',
+      '#title' => t('Background image repeat'),
+      '#options' => array(
+        0 => t('No-repeat'),
+        1 => t('Repeat'),
+        2 => t('Repeat - X'),
+        3 => t('Repeat - Y'),
+      ),
+      '#default_value' => 0,
+    );
+  }
+  // end of region details loop
+  /*
+   * 
+   
   $form['scroll']['scroll_1'] = array(
     '#type' => 'details',
     '#title' => 'Scroll 1',
@@ -55,7 +119,7 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     ),
     '#default_value' => 0,
   );
- 
+  */
   
   $filename = drupal_get_path('theme', 'scroll') . '/scroll.theme';
   $form_state->addBuildInfo('files', array($filename));
@@ -67,6 +131,18 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
   $account = \Drupal::currentUser();
   $values = $form_state->getValues();
   
+  for($i=1; $i<=5; $i++) {
+    // Load the file via file.fid.
+    if ($file = \Drupal\file\Entity\File::load($values["scroll_' . $i . '_image"][0])) {
+      // Change status to permanent.
+      $file->setPermanent();
+      $file->save();
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage->add($file, 'user', 'user', $account->id());
+    }
+  }
+  
+  /*
   if (isset($values["scroll_1_image"]) && !empty($values["scroll_1_image"])) {
     // Load the file via file.fid.
     if ($file = \Drupal\file\Entity\File::load($values["scroll_1_image"][0])) {
@@ -77,11 +153,23 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
       $file_usage->add($file, 'user', 'user', $account->id());
     }
   }  
-  
+   * 
+   */
 }
 
 function scroll_preprocess_page(&$vars) {
   $theme_path = base_path() . drupal_get_path('theme', 'scroll');
+  
+  $image_path = array();
+  for($i=1; $i<= 5; $i++) {
+    $fid = theme_get_setting('scroll_' . $i . '_image', 'scroll');
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    if (!empty($file)) {
+      $uri = $file->getFileUri();
+      $image_path[$i] = file_create_url($uri);
+    }
+  }
+  /*
   $fid = theme_get_setting('scroll_1_image', 'scroll');
   $file = \Drupal\file\Entity\File::load($fid[0]);
   if (!empty($file)) {
@@ -92,7 +180,24 @@ function scroll_preprocess_page(&$vars) {
   }
   
   $vars['scroll_1_image'] = $image_path;
+  * 
+   */
+  
+  for($i=1; $i<=5; $i++) {
+    if(isset($image_path[$i])) {
+      $vars['scroll_' . $i . '_image'] = $image_path[$i];
+    }    
+  }
   
   $scroll_1_height = theme_get_setting('scroll_1_height', 'scroll');
-  $vars['scroll_1_height'] = $scroll_1_height; 
+  $scroll_2_height = theme_get_setting('scroll_2_height', 'scroll');
+  $scroll_3_height = theme_get_setting('scroll_3_height', 'scroll');
+  $scroll_4_height = theme_get_setting('scroll_4_height', 'scroll');
+  $scroll_5_height = theme_get_setting('scroll_5_height', 'scroll');
+  
+  $vars['scroll_1_height'] = $scroll_1_height;
+  $vars['scroll_2_height'] = $scroll_2_height;
+  $vars['scroll_3_height'] = $scroll_3_height;
+  $vars['scroll_4_height'] = $scroll_4_height;
+  $vars['scroll_5_height'] = $scroll_5_height;
 }

@@ -50,10 +50,6 @@
   <header role="banner">
     {{ page.header }}
     {{ page.primary_menu }}
-    {{ page.secondary_menu }}
-    {{ page.breadcrumb }}
-    {{ page.highlighted }}
-    {{ page.help }}
   </header>
   <div class ="fixed">
       {{ page.fixed }}
@@ -68,16 +64,36 @@
                     min-height:{{ scroll_1_height }}px;">
         {{ page.scroll_1 }}
       </div><!-- /scroll_1 -->
-      <div class ='scroll_2'>
+      <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
+                    background-position:top left;
+                    background-repeat:no-repeat;
+                    background-size:cover;
+                    background-attachment:fixed;
+                    min-height:{{ scroll_2_height }}px;">
         {{ page.scroll_2 }}
       </div><!-- /scroll_2 -->
-      <div class ='scroll_3'>
+      <div class ='scroll_3' style = "background-image:url('{{ scroll_3_image }}');
+                    background-position:top left;
+                    background-repeat:no-repeat;
+                    background-size:cover;
+                    background-attachment:fixed;
+                    min-height:{{ scroll_3_height }}px;">
         {{ page.scroll_3 }}
       </div><!-- /scroll_3 -->
-      <div class ='scroll_4'>
+      <div class ='scroll_4' style = "background-image:url('{{ scroll_4_image }}');
+                    background-position:top left;
+                    background-repeat:no-repeat;
+                    background-size:cover;
+                    background-attachment:fixed;
+                    min-height:{{ scroll_4_height }}px;">
         {{ page.scroll_4 }}
       </div><!-- /scroll_4 -->
-      <div class ='scroll_5'>
+      <div class ='scroll_5' style = "background-image:url('{{ scroll_5_image }}');
+                    background-position:top left;
+                    background-repeat:no-repeat;
+                    background-size:cover;
+                    background-attachment:fixed;
+                    min-height:{{ scroll_5_height }}px;">
         {{ page.scroll_5 }}
       </div><!-- /scroll_5 -->
       
@@ -96,7 +112,6 @@
       <div class="layout-content">
         {{ page.content }}
       </div>{# /.layout-content #}
-      
       {% if page.footer %}
         <footer role="contentinfo">
           {{ page.footer }}
