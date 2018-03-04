@@ -6,6 +6,7 @@ base theme: false
 
 libraries:
     - scroll/common
+    - scroll/bootstrap
 
 regions:
     header: 'Header'

@@ -4,6 +4,12 @@ use Drupal\Component\Utility\Html;
 
 function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   
+  if(!empty($form_state->getValue(background_type))) {
+    $background_type = (int)$form_state->getValue('background_type'); 
+  }else{
+    $background_type = 0;
+  }
+  
   //ksm($form);
   $form['scroll'] = array(
     '#type' => 'fieldset',
@@ -14,14 +20,52 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#type' => 'fieldset',
     '#title' => t('Fixed region'),
     '#collapsible' => FALSE,
+  );  
+  $form['scroll']['fixed']['background_type'] = array(
+    '#type' => 'select',
+    '#title' => t('Type of the background'),
+    '#options' => array(
+      0 => 'Image',
+      1 => 'Video',
+      2 => 'Slider',
+    ),
+    '#default_value' => theme_get_setting('background_type'),
+    '#ajax' => array(
+      'callback' => 'ajax_background_type_callback',
+      'wrapper' => 'background-type',
+      'effect' => 'fade',
+    )
   );
-  $form['scroll']['fixed']['fixed_image'] = array(
-    '#type' => 'managed_file',
-    '#title' => t('Background image'),
-    '#description' => t('Background image of the Fixed region'),
-    '#default_value' => theme_get_setting('fixed_image', 'scroll'),
-    '#upload_location' => 'public://',
-  );
+  
+  $form['scroll']['fixed']['fixed_background'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Background type:'),
+    '#prefix' => '<div id = "background-type">',
+    '#suffix' => '</div>'
+  );  
+  
+  switch($background_type) {
+    case 0:
+      $form['scroll']['fixed']['fixed_background']['fixed_image'] = array(
+        '#type' => 'managed_file',
+        '#title' => t('Background image'),
+        '#description' => t('Background image of the Fixed region'),
+        '#default_value' => theme_get_setting('fixed_image', 'scroll'),
+        '#upload_location' => 'public://',
+      );
+      break;
+    case 1:
+      $form['scroll']['fixed']['fixed_background']['fixed_video'] = array(
+        '#type' => 'managed_file',
+        '#title' => t('Video'),
+        '#description' => t('Choose video file for Fixed region'),
+        '#default_value' => theme_get_setting('fixed_video', 'scroll'),
+        '#upload_location' => 'public://',
+      );
+      break;
+    case 2:
+      break;
+  }  
   
   /*
    * Generate 5 region details form elements
@@ -78,6 +122,10 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
   $form_state->addBuildInfo('files', array($filename));
   // Custom submit to save the file permenant.
   $form['#submit'][] = 'scroll_settings_form_submit';
+}
+
+function ajax_background_type_callback(&$form, $form_state) {
+  return $form['scroll']['fixed']['fixed_background'];
 }
 
 function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {

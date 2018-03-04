@@ -2,6 +2,14 @@ common:
     css:
         theme:
             css/styles.css: {}
-            css/colors.css: {}
-            
-        
+            css/colors.css: {}           
+bootstrap:
+    version: 4.0.0
+    css:
+        theme:
+            vendor/bootstrap/css/bootstrap.min.css: {}
+    js:
+        vendor/bootstrap/js/bootstrap.min.js: {}
+    dependencies:
+        - core/jquery
+    
