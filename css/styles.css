@@ -2,26 +2,23 @@ html, body {
   margin: 0;
   padding: 0; }
 
-body {
-  background-color: #ddd; }
-
 header {
   width: 100%;
   position: fixed;
-  z-index: 100;
-  background-color: red; }
+  z-index: 100; }
 
 .fixed {
   position: fixed;
   width: 100%;
-  height: 100%;
-  background-color: #f45aea; }
+  height: 100%; }
 
 .scroll {
   width: 100%;
   height: 500px;
-  background-color: yellow;
   position: absolute;
   top: 100%; }
+
+footer {
+  min-height: 200px; }
 
 /*# sourceMappingURL=styles.css.map */

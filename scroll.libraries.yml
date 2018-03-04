@@ -2,5 +2,6 @@ common:
     css:
         theme:
             css/styles.css: {}
+            css/colors.css: {}
             
         

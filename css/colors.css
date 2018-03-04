@@ -1,0 +1,37 @@
+body{
+    background-color:#ffffff;
+}
+
+header{
+    background-color:#1d84c3;
+}
+
+.fixed{
+    background-color:#055a8e;
+}
+
+.scroll{
+    background-color:#027a8e;
+}
+
+.scroll_1{
+    background-color:#f6f6f2;
+}
+
+.scroll_2{
+    background-color:#f9f9f9;
+}
+
+.scroll_3{
+    background-color:#292929
+}
+.scroll_4{
+    background-color:#fffeff
+}
+.scroll_5{
+    background-color:#3b3b3b
+}
+
+footer{
+    background-color:#fefefe;
+}

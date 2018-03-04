@@ -60,10 +60,12 @@
   </div><!-- /fixed -->
   
   <div class ='scroll'>
-      <div class ='scroll_1' style = "background-color:{{ scroll_1_color }};
-                    background:url('{{ scroll_1_image }}') no-repeat top left;
+      <div class ='scroll_1' style = "background-image:url('{{ scroll_1_image }}');
+                    background-position:top left;
+                    background-repeat:no-repeat;
                     background-size:cover;
-                    background-attachment:fixed">
+                    background-attachment:fixed;
+                    min-height:{{ scroll_1_height }}px;">
         {{ page.scroll_1 }}
       </div><!-- /scroll_1 -->
       <div class ='scroll_2'>
