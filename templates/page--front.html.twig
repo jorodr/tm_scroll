@@ -51,49 +51,87 @@
     {{ page.header }}
     {{ page.primary_menu }}
   </header>
-  <div class ="fixed">
+  
+  
+  <!-- Region Fixed -->
+  
+  {% if background_type == 1 %}
+    <div class ="fixed" style = "background-image:url('{{ fixed_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[1] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[1] }};
+            min-height:{{ region_height[1] }}px;">       
       {{ page.fixed }}
+  {% endif %}
   </div><!-- /fixed -->
   
+  
+  
   <div class ='scroll'>
-      <div class ='scroll_1' style = "background-image:url('{{ scroll_1_image }}');
-                    background-position:top left;
-                    background-repeat:{{ background_repeat[1] }};
-                    background-size:cover;
-                    background-attachment:{{ background_attachment[1] }};
-                    min-height:{{ region_height[1] }}px;">
+      {% if scroll_1_image %}
+        <div class ='scroll_1' style = "background-image:url('{{ scroll_1_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[1] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[1] }};
+            min-height:{{ region_height[1] }}px;">
+      {% else %}
+          <div class ='scroll_1' style = "min-height:{{ region_height[1] }}px;">
+      {% endif %}
         {{ page.scroll_1 }}
       </div><!-- /scroll_1 -->
-      <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
-                    background-position:top left;
-                    background-repeat:{{ background_repeat[2] }};
-                    background-size:cover;
-                    background-attachment:{{ background_attachment[2] }};
-                    min-height:{{ region_height[2] }}px;">
+      
+      {% if scroll_2_image %}
+          <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[2] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[2] }};
+            min-height:{{ region_height[2] }}px;">
+      {% else %}
+          <div class ='scroll_2' style = "min-height:{{ region_height[2] }}px;">
+      {% endif %}
+      
         {{ page.scroll_2 }}
       </div><!-- /scroll_2 -->
-      <div class ='scroll_3' style = "background-image:url('{{ scroll_3_image }}');
-                    background-position:top left;
-                    background-repeat:{{ background_repeat[3] }};
-                    background-size:cover;
-                    background-attachment:{{ background_attachment[3] }};
-                    min-height:{{ region_height[3] }}px;">
+      
+      {% if scroll_3_image %}
+          <div class ='scroll_3' style = "background-image:url('{{ scroll_3_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[3] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[3] }};
+            min-height:{{ region_height[3] }}px;">
+      {% else %}
+          <div class ='scroll_3' style = "min-height:{{ region_height[3] }}px;">
+      {% endif %}        
         {{ page.scroll_3 }}
       </div><!-- /scroll_3 -->
-      <div class ='scroll_4' style = "background-image:url('{{ scroll_4_image }}');
-                    background-position:top left;
-                    background-repeat:{{ background_repeat[4] }};
-                    background-size:cover;
-                    background-attachment:{{ background_attachment[4] }};
-                    min-height:{{ region_height[4] }}px;">
+      
+      {% if scroll_4_image %}
+          <div class ='scroll_4' style = "background-image:url('{{ scroll_4_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[4] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[4] }};
+            min-height:{{ region_height[4] }}px;"
+      {% else %}
+          <div class ='scroll_4' style = "min-height:{{ region_height[4] }}px;">
+      {% endif %}  
         {{ page.scroll_4 }}
       </div><!-- /scroll_4 -->
-      <div class ='scroll_5' style = "background-image:url('{{ scroll_5_image }}');
-                    background-position:top left;
-                    background-repeat:{{ background_repeat[5] }};
-                    background-size:cover;
-                    background-attachment:{{ background_attachment[5] }};
-                    min-height:{{ region_height[5] }}px;">
+      
+      {% if scroll_5_image %}
+          <div class ='scroll_5' style = "background-image:url('{{ scroll_5_image }}');
+            background-position:top left;
+            background-repeat:{{ background_repeat[5] }};
+            background-size:cover;
+            background-attachment:{{ background_attachment[5] }};
+            min-height:{{ region_height[5] }}px;">
+      {% else %}
+          <div class ='scroll_5' style = "min-height:{{ region_height[5] }}px;">
+      {% endif %}  
         {{ page.scroll_5 }}
       </div><!-- /scroll_5 -->
       

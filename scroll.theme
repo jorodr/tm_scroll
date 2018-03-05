@@ -1,16 +1,13 @@
 <?php
+define('CLEAR_BACKGROUND', 0);
+define('BACKGROUND_IMAGE', 1);
+define('VIDEO_BACKGROUND', 2);
+define('SLIDER', 3);
 
 use Drupal\Component\Utility\Html;
 
 function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormStateInterface $form_state) {
   
-  if(!empty($form_state->getValue(background_type))) {
-    $background_type = (int)$form_state->getValue('background_type'); 
-  }else{
-    $background_type = 0;
-  }
-  
-  //ksm($form);
   $form['scroll'] = array(
     '#type' => 'fieldset',
     '#title' => t('Scroll theme settings'),
@@ -20,56 +17,91 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#type' => 'fieldset',
     '#title' => t('Fixed region'),
     '#collapsible' => FALSE,
-  );  
+  ); 
+  
   $form['scroll']['fixed']['background_type'] = array(
     '#type' => 'select',
-    '#title' => t('Type of the background'),
+    '#title' => t('Use'),
+    '#description' => t('Choose what type of background will use in region Fixed'),
     '#options' => array(
-      0 => 'Image',
-      1 => 'Video',
-      2 => 'Slider',
+      CLEAR_BACKGROUND => 'None',
+      BACKGROUND_IMAGE => 'Image',
+      VIDEO_BACKGROUND => 'Video',
+      SLIDER => 'Slider',
     ),
-    '#default_value' => theme_get_setting('background_type'),
-    '#ajax' => array(
-      'callback' => 'ajax_background_type_callback',
-      'wrapper' => 'background-type',
-      'effect' => 'fade',
-    )
-  );
-  
+    '#default_value' => theme_get_setting('background_type'),    
+  );   
+   
   $form['scroll']['fixed']['fixed_background'] = array(
     '#type' => 'fieldset',
     '#title' => t('Background type:'),
     '#prefix' => '<div id = "background-type">',
     '#suffix' => '</div>'
+  ); 
+  
+  $form['scroll']['fixed']['fixed_background']['image'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Background image'),
+  );
+  $form['scroll']['fixed']['fixed_background']['image']['fixed_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Background image'),
+    '#description' => t('Background image of the Fixed region'),
+    '#default_value' => theme_get_setting('fixed_image', 'scroll'),
+    '#upload_location' => 'public://',    
+  );
+  
+  $form['scroll']['fixed']['fixed_background']['video'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Background Video'),
+  );
+  $form['scroll']['fixed']['fixed_background']['video']['fixed_video'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Video'),
+    '#description' => t('Choose video file for Fixed region'),
+    '#default_value' => theme_get_setting('fixed_video', 'scroll'),
+    '#upload_location' => 'public://',
+    
+  );
+  
+  /*
+   * ****************** Slider ******************
+   */
+  $form['scroll']['fixed']['fixed_background']['slider'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Slider components'),
   );  
-  
-  switch($background_type) {
-    case 0:
-      $form['scroll']['fixed']['fixed_background']['fixed_image'] = array(
-        '#type' => 'managed_file',
-        '#title' => t('Background image'),
-        '#description' => t('Background image of the Fixed region'),
-        '#default_value' => theme_get_setting('fixed_image', 'scroll'),
-        '#upload_location' => 'public://',
-      );
-      break;
-    case 1:
-      $form['scroll']['fixed']['fixed_background']['fixed_video'] = array(
-        '#type' => 'managed_file',
-        '#title' => t('Video'),
-        '#description' => t('Choose video file for Fixed region'),
-        '#default_value' => theme_get_setting('fixed_video', 'scroll'),
-        '#upload_location' => 'public://',
-      );
-      break;
-    case 2:
-      break;
-  }  
-  
+  $form['scroll']['fixed']['fixed_background']['slider']['slide_1_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Slide 1 image'),
+    '#description' => t('Choose video file for Fixed region'),
+    '#default_value' => theme_get_setting('slide_1_image', 'scroll'),
+    '#upload_location' => 'public://',
+  );
+  $form['scroll']['fixed']['fixed_background']['slider']['slide_2_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Slide 2 image'),
+    '#description' => t('Choose video file for Fixed region'),
+    '#default_value' => theme_get_setting('slide_2_image', 'scroll'),
+    '#upload_location' => 'public://',
+  );
+  $form['scroll']['fixed']['fixed_background']['slider']['slide_3_image'] = array(
+    '#type' => 'managed_file',
+    '#title' => t('Slide 3 image'),
+    '#description' => t('Choose video file for Fixed region'),
+    '#default_value' => theme_get_setting('slide_3_image', 'scroll'),
+    '#upload_location' => 'public://',
+  );
   /*
    * Generate 5 region details form elements
    */
+  $form['scroll']['fximg'] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Fixed background image Please'),
+      '#description' => t('Please choose the image for the Fixed'),
+      '#default_value' => theme_get_setting('fximg', 'scroll'),
+      '#upload_location' => 'public://',
+    );
   for($i=1; $i<=5;$i++) {
     $form["scroll"]["scroll_" . $i] = array(
       '#type' => 'details',
@@ -132,6 +164,27 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
   $account = \Drupal::currentUser();
   $values = $form_state->getValues();
   
+  //Change status of the uploaded images to permanent
+  
+  //Fixed region image
+  if ($file = \Drupal\file\Entity\File::load($values["fixed_image"][0])) {
+    // Change status to permanent.
+    $file->setPermanent();
+    $file->save();
+    $file_usage = \Drupal::service('file.usage');
+    $file_usage->add($file, 'user', 'user', $account->id());
+  }
+  
+  //Fixed region video
+  if ($file = \Drupal\file\Entity\File::load($values["fixed_video"][0])) {
+    // Change status to permanent.
+    $file->setPermanent();
+    $file->save();
+    $file_usage = \Drupal::service('file.usage');
+    $file_usage->add($file, 'user', 'user', $account->id());
+  }
+  
+  //Scroll 1..5 background images
   for($i=1; $i<=5; $i++) {
     // Load the file via file.fid.
     if ($file = \Drupal\file\Entity\File::load($values["scroll_' . $i . '_image"][0])) {
@@ -167,6 +220,25 @@ function scroll_preprocess_page(&$vars) {
   $image_attachment = array();
   $image_repeat = array();
   
+  $fid = theme_get_setting('fixed_video', 'scroll');
+  $file = \Drupal\file\Entity\File::load($fid[0]);
+  if (!empty($file)) {
+    $uri = $file->getFileUri();
+    $fixed_video = file_create_url($uri);
+  }
+  
+  $fid = theme_get_setting('fixed_image', 'scroll');
+  $file = \Drupal\file\Entity\File::load($fid[0]);
+  if (!empty($file)) {
+    $uri = $file->getFileUri();
+    $fixed_image = file_create_url($uri);
+  }
+  
+  //set region Fixed background
+  $vars['fixed_video'] = $fixed_video;;    
+  $vars['fixed_image'] = $fixed_image;
+  $vars['background_type'] = theme_get_setting('background_type', 'scroll');
+    
   for($i=1; $i<=5; $i++) {    
     $vars[region_height][$i] = theme_get_setting('scroll_' . $i . '_height', 'scroll');
     //image attachment propertirs for every region background image
@@ -192,6 +264,6 @@ function scroll_preprocess_page(&$vars) {
       case 3:
         $vars['background_repeat'][$i] = 'repeat-y';
         break;
-    }
-  }
+    }   
+  }   
 }
