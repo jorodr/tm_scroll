@@ -2,7 +2,10 @@ common:
     css:
         theme:
             css/styles.css: {}
-            css/colors.css: {}           
+            css/colors.css: {}
+    js:
+        js/scroll.js: {}
+        
 bootstrap:
     version: 4.0.0
     css:
@@ -12,4 +15,3 @@ bootstrap:
         vendor/bootstrap/js/bootstrap.min.js: {}
     dependencies:
         - core/jquery
-    

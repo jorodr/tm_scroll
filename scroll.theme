@@ -48,7 +48,10 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#title' => t('Background image'),
     '#description' => t('Background image of the Fixed region'),
     '#default_value' => theme_get_setting('fixed_image', 'scroll'),
-    '#upload_location' => 'public://',    
+    '#upload_location' => 'public://',
+    '#upload_validators' => array(
+      'file_validate_extensions' => array('jpg png svg jpeg'),
+    ),
   );
   
   $form['scroll']['fixed']['fixed_background']['video'] = array(
@@ -61,7 +64,9 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#description' => t('Choose video file for Fixed region'),
     '#default_value' => theme_get_setting('fixed_video', 'scroll'),
     '#upload_location' => 'public://',
-    
+    '#upload_validators' => array(
+        'file_validate_extensions' => array('mp4 m4v ogg'),
+      )
   );
   
   /*
@@ -124,6 +129,9 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
       '#description' => t('Please choose the image for the Scroll' . $i .'region'),
       '#default_value' => theme_get_setting('scroll_' . $i . '_image', 'scroll'),
       '#upload_location' => 'public://',
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('gif png jpg jpeg svg'),
+      )
     );
     
     $form['scroll']['scroll_' . $i]['scroll_' . $i . '_attachment'] = array(
@@ -235,7 +243,7 @@ function scroll_preprocess_page(&$vars) {
   }
   
   //set region Fixed background
-  $vars['fixed_video'] = $fixed_video;;    
+  $vars['fixed_video'] = $fixed_video;    
   $vars['fixed_image'] = $fixed_image;
   $vars['background_type'] = theme_get_setting('background_type', 'scroll');
     

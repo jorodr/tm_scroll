@@ -5,19 +5,36 @@ html, body {
 header {
   width: 100%;
   position: fixed;
-  z-index: 100; }
+  z-index: 100;
+  height: 100px;
+  padding: 10px;
+  box-sizing: border-box;
+  transition: all 0.3s;
+  border-bottom: 1px solid #aaa; }
+  header img {
+    height: 80px;
+    transition: all 0.3s; }
+
+header.smaller {
+  height: 70px; }
+  header.smaller img {
+    height: 50px; }
 
 .fixed {
   position: fixed;
   width: 100%;
   height: 100%;
-  padding-top: 100px; }
+  padding-top: 50px; }
 
 .scroll {
   width: 100%;
   height: 500px;
   position: absolute;
   top: 100%; }
+  .scroll .scroll_1 h2 {
+    width: 100%;
+    text-align: center;
+    padding-top: 60px; }
 
 footer {
   min-height: 200px; }

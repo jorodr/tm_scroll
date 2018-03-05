@@ -47,9 +47,9 @@
 #}
 <div class="layout-container">
 
-  <header role="banner">
+  <header role="banner" id="js-header">
     {{ page.header }}
-    {{ page.primary_menu }}
+    {# page.primary_menu #}
   </header>
   
   
@@ -57,12 +57,20 @@
   
   {% if background_type == 1 %}
     <div class ="fixed" style = "background-image:url('{{ fixed_image }}');
-            background-position:top left;
+            background-position:center 110px;
             background-repeat:{{ background_repeat[1] }};
             background-size:cover;
             background-attachment:{{ background_attachment[1] }};
             min-height:{{ region_height[1] }}px;">       
       {{ page.fixed }}
+  {% elseif background_type == 2 %}
+      <div class ="fixed">
+        <div class="video">
+            <video width="100%" height = "100%" autoplay loop>
+              <source src="{{ fixed_video }}" type="video/mp4">				 
+              Your browser does not support the video tag.
+            </video>
+	</div>
   {% endif %}
   </div><!-- /fixed -->
   
@@ -84,9 +92,9 @@
       
       {% if scroll_2_image %}
           <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
-            background-position:top left;
+            background-position:bottom left;
             background-repeat:{{ background_repeat[2] }};
-            background-size:cover;
+            background-size:400px;
             background-attachment:{{ background_attachment[2] }};
             min-height:{{ region_height[2] }}px;">
       {% else %}
@@ -146,10 +154,7 @@
           {{ page.sidebar_second }}
         </aside>
       {% endif %}
-      
-      <div class="layout-content">
-        {{ page.content }}
-      </div>{# /.layout-content #}
+     
       {% if page.footer %}
         <footer role="contentinfo">
           {{ page.footer }}
