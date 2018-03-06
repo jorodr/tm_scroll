@@ -46,18 +46,22 @@
  */
 #}
 <div class="layout-container">
-
-  <header role="banner" id="js-header">
-    {{ page.header }}
-    {# page.primary_menu #}
-  </header>
-  
+  {% if header_bg_color %}
+    <header role="banner" id="js-header" style = "background-color:rgba( {{header_bg_color}} )">
+        {{ page.header }}
+    </header>
+  {%else %}
+    <header role="banner" id="js-header">
+      {{ page.header }}
+      {# page.primary_menu #}
+    </header>
+  {%endif %}
   
   <!-- Region Fixed -->
   
   {% if background_type == 1 %}
     <div class ="fixed" style = "background-image:url('{{ fixed_image }}');
-            background-position:center 110px;
+            background-position:center;
             background-repeat:{{ background_repeat[1] }};
             background-size:cover;
             background-attachment:{{ background_attachment[1] }};
@@ -88,6 +92,10 @@
           <div class ='scroll_1' style = "min-height:{{ region_height[1] }}px;">
       {% endif %}
         {{ page.scroll_1 }}
+        Region Scroll 1
+        {{ slide_1_image }}
+        <h2>{{ slide_1_title }}</h2>
+        {{ slide_1_text }}
       </div><!-- /scroll_1 -->
       
       {% if scroll_2_image %}
@@ -102,6 +110,7 @@
       {% endif %}
       
         {{ page.scroll_2 }}
+        Region Scroll 2
       </div><!-- /scroll_2 -->
       
       {% if scroll_3_image %}
@@ -115,6 +124,7 @@
           <div class ='scroll_3' style = "min-height:{{ region_height[3] }}px;">
       {% endif %}        
         {{ page.scroll_3 }}
+        Region Scroll 3
       </div><!-- /scroll_3 -->
       
       {% if scroll_4_image %}
@@ -123,11 +133,12 @@
             background-repeat:{{ background_repeat[4] }};
             background-size:cover;
             background-attachment:{{ background_attachment[4] }};
-            min-height:{{ region_height[4] }}px;"
+            min-height:{{ region_height[4] }}px;">
       {% else %}
           <div class ='scroll_4' style = "min-height:{{ region_height[4] }}px;">
       {% endif %}  
         {{ page.scroll_4 }}
+        Region Scroll 4
       </div><!-- /scroll_4 -->
       
       {% if scroll_5_image %}
@@ -141,6 +152,7 @@
           <div class ='scroll_5' style = "min-height:{{ region_height[5] }}px;">
       {% endif %}  
         {{ page.scroll_5 }}
+        Region Scroll 5
       </div><!-- /scroll_5 -->
       
       {% if page.sidebar_first %}
@@ -158,6 +170,7 @@
       {% if page.footer %}
         <footer role="contentinfo">
           {{ page.footer }}
+          Footer
         </footer>
       {% endif %}
   </div><!-- /scroll -->
