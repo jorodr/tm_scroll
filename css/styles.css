@@ -42,4 +42,20 @@ header.smaller {
 footer {
   min-height: 200px; }
 
+.carousel_background {
+  width: 100%;
+  height: 100vh;
+  padding-top: 150px;
+  box-sizing: border-box; }
+  .carousel_background h2 {
+    width: 30%;
+    line-height: 60px;
+    margin: 50px auto;
+    text-align: center;
+    border: 2px solid #666; }
+  .carousel_background p {
+    width: 50%;
+    margin: 0 auto;
+    text-align: juscify; }
+
 /*# sourceMappingURL=styles.css.map */

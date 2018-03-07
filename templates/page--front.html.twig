@@ -75,6 +75,41 @@
               Your browser does not support the video tag.
             </video>
 	</div>
+  {% elseif background_type == 3 %}
+      <div class ="fixed">
+        <div id="owl-demo" class="owl-carousel owl-theme">
+          <div  class = "carousel_background" id="image_1" style = "background:url('{{ slide_1_image }}')
+                no-repeat top center; background-size:cover">
+            <h2>{{ slide_1_title }}</h2>
+            <p>{{ slide_1_text }}</p>
+            <!--<img src="{{ slide_1_image }}"/>-->
+          </div>
+          <div  class = "carousel_background" id="image_2" style = "background:url('{{ slide_2_image }}')
+                no-repeat top center; background-size:cover">
+            <h2>{{ slide_2_title }}</h2>
+            <p>{{ slide_2_text }}</p>
+             <!--<img src="{{ slide_2_image }}"/>-->
+          </div>
+          <div  class = "carousel_background" id="image_3" style = "background:url('{{ slide_3_image }}')
+                no-repeat top center; background-size:cover">
+            <h2>{{ slide_3_title }}</h2>
+            <p>{{ slide_3_text }}</p>
+             <!--<img src="{{ slide_3_image }}"/>-->
+          </div>
+          <div  class = "carousel_background" id="image_4" style = "background:url('{{ slide_4_image }}')
+                no-repeat top center; background-size:cover">
+            <h2>{{ slide_4_title }}</h2>
+            <p>{{ slide_4_text }}</p>
+             <!--<img src="{{ slide_3_image }}"/>-->
+          </div>
+          <div  class = "carousel_background" id="image_5" style = "background:url('{{ slide_5_image }}')
+                no-repeat top center; background-size:cover">
+            <h2>{{ slide_5_title }}</h2>
+            <p>{{ slide_5_text }}</p>
+             <!--<img src="{{ slide_3_image }}"/>-->
+          </div>
+        </div>
+  
   {% endif %}
   </div><!-- /fixed -->
   
@@ -93,9 +128,6 @@
       {% endif %}
         {{ page.scroll_1 }}
         Region Scroll 1
-        {{ slide_1_image }}
-        <h2>{{ slide_1_title }}</h2>
-        {{ slide_1_text }}
       </div><!-- /scroll_1 -->
       
       {% if scroll_2_image %}
