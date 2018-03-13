@@ -23,3 +23,12 @@ bootstrap:
         vendor/bootstrap/js/bootstrap.min.js: {}
     dependencies:
         - core/jquery
+        
+slimmenu:
+    css:
+        theme:
+            vendor/slimmenu/css/slimmenu.css: {}
+    js:
+        vendor/slimmenu/js/jquery.slimmenu.js: {}
+    dependencies:
+        - core/jquery

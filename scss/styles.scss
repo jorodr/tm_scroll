@@ -21,6 +21,12 @@ header{
         height:80px;
         transition:all 0.3s;
     }
+    
+    .main-menu{
+        position: absolute;
+        right: 0;
+        top: 30%;
+    }
 }
 
 header.smaller{
@@ -35,7 +41,24 @@ header.smaller{
     position:fixed;
     width:100%;
     height:100%;
+    
+    .fixed-video-front{
+        position:absolute;
+        top:0;
+        left:0;
+        width:100%;
+        height:100%;
+        padding-top:100px;
+    }    
 }
+
+    #fixed_image{
+        padding-top:100px;
+    }
+    
+    #fixed_none{
+        padding-top:100px;
+    }
 
 .scroll{
     width:100%;
@@ -47,6 +70,8 @@ header.smaller{
     .scroll_1, .scroll_2, .scroll_3, .scroll_4, .scroll_5, footer{
         width:100%;
         float:left;
+        padding:80px 0;
+        box-sizing: border-box;
     }
     
     .scroll_1{
@@ -58,6 +83,43 @@ header.smaller{
     }
 }
 
+.member-section{
+    h2{
+        text-align:center;
+        margin:30px 0;
+    }
+    
+    p{
+        text-align:center;
+        margin:10px 0;
+    }
+    
+    .member{
+        margin-top:50px;
+        
+        .member-picture{
+            width:150px;
+            height:150px;
+            margin:0 auto;
+            border:7px solid #ccc;
+            border-radius:50%;
+            background-position:center top;
+            background-repeat:no-repeat;
+            background-size:auto 100%;
+            transition:all 0.4s;
+            
+            &:hover{
+                background-size: auto 140%;
+            }
+        }
+        
+        h3, p{
+            text-align:center;
+        }
+    }
+    
+}
+
 footer{
     min-height:200px;
 }
@@ -67,6 +129,7 @@ footer{
     height:100vh;
     padding-top:150px;
     box-sizing:border-box;
+    color:#fff;
     
     h2{
         width:30%;
@@ -74,12 +137,18 @@ footer{
         margin:50px auto;
         text-align:center;
         border:2px solid #666;
+        background-color:rgba(0,0,0,0.5);
+        border:2px solid #fff;
     }
     
     p{
         width:50%;
         margin:0 auto;
         text-align:juscify;
+        background-color:rgba(0,0,0,0.5);
+        padding:15px;
+        border:2px solid #fff;
+        border-radius:4px;
     }
 }
 

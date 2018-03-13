@@ -28,6 +28,22 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#default_value' => theme_get_setting('header_bg_color', 'scroll'),
   );
   
+  $form['scroll']['header']['scroll_menu'] = array(
+    '#type' => 'fieldset',
+    '#title' => 'Scroll menu elements',
+    '#description' => t('The elements of the top menu scrolling to 5 scroll regions'),
+    '#collapsible' => FALSE,
+  );
+  
+  for($i=1; $i<=5; $i++) {
+    $form['scroll']['header']['scroll_menu']['menu_'.$i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title of '. $i . ' menu element'),
+      '#description' => t('This smenu element will scroll to ' . $i . ' region'),
+      '#size' => 30,
+    );
+  }  
+  
   // Fixed region form elements
   $form['scroll']['fixed'] = array(
     '#type' => 'fieldset',
@@ -123,10 +139,10 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
       '#description' => t('It will be shown under the title'),
       '#default_value' => theme_get_setting('slide_' . $i . '_text'),
     );
-  } 
-// end of slider details loop
+  }
   
   
+// end of slider details loop  
   
   /*
    * Generate 5 region details form elements
@@ -182,6 +198,120 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
   }
   // end of region details loop
   
+  /*
+   * Articles section info
+   */
+  
+  $form['scroll']['articles'] = array(
+    '#type' => 'details',
+    '#title' => t('Articles section'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['scroll']['articles']['articles_include'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show default data'),
+    '#description' => t('Check ON if you want to show the ARTICLES data from the theme'),
+    '#default_value' => TRUE,
+  );
+  
+  $form['scroll']['articles']['articles_setcion_title'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Title'),
+    '#description' => t('Type the title of the Articles section'),
+    '#default_value' => theme_get_setting('articles_setcion_title', 'scroll'),
+  );
+  
+  $form['scroll']['articles']['articles_setcion_description'] = array(
+    '#type' => 'textarea',
+    '#title' => t('Description'),
+    '#description' => t('The additional text below the title of the Articles section'),
+    '#default_value' => theme_get_setting('articles_setcion_description', 'scroll'),
+  );
+  
+  for($i=1; $i<=4; $i++) {
+    $form['scroll']['articles']['article' . $i] = array(
+      '#type' => 'details',
+      '#title' => t('Article ' . $i),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    
+    $form['scroll']['articles']['article' . $i]['article_picture_' . $i] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Article picture'),
+      '#default_value' => theme_get_setting('article_picture_' . $i, 'scroll'),
+      '#upload_location' => 'public://',
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('gif png jpg jpeg svg'),
+      ),
+    );
+    
+    $form['scroll']['articles']['article' . $i]['article_title_' . $i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Article Title'),
+      '#default_value' => theme_get_setting('article_title_' . $i, 'scroll'),
+    );
+    
+    $form['scroll']['articles']['article' . $i]['article_details_' . $i] = array(
+      '#type' => 'textarea',
+      '#title' => t('Article details'),
+      '#default_value' => theme_get_setting('article_details_' . $i, 'scroll'),
+    );
+  }
+  //end of articles section
+  
+  /*
+   * Team section info
+   */
+  
+  $form['scroll']['team'] = array(
+    '#type' => 'details',
+    '#title' => t('Team section'),
+    '#collapsible' => TRUE,
+    '#collapsed' => TRUE,
+  );
+  
+  $form['scroll']['team']['team_include'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Show default data'),
+    '#description' => t('Check ON if you want to show the TEAM data from the theme'),
+    '#default_value' => TRUE,
+  );
+  
+  for($i=1; $i<=4; $i++) {
+    $form['scroll']['team']['member' . $i] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Member ' . $i),
+      '#collapsible' => TRUE,
+      '#collapsed' => FALSE,
+    );
+    
+    $form['scroll']['team']['member' . $i]['member_picture_' . $i] = array(
+      '#type' => 'managed_file',
+      '#title' => t('Member picture'),
+      '#default_value' => theme_get_setting('member_picture_' . $i, 'scroll'),
+      '#upload_location' => 'public://',
+      '#upload_validators' => array(
+        'file_validate_extensions' => array('gif png jpg jpeg svg'),
+      ),
+    );
+    
+    $form['scroll']['team']['member' . $i]['member_title_' . $i] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title'),
+      '#default_value' => theme_get_setting('member_title_' . $i, 'scroll'),
+    );
+    
+    $form['scroll']['team']['member' . $i]['member_details_' . $i] = array(
+      '#type' => 'textarea',
+      '#title' => t('Member details'),
+      '#default_value' => theme_get_setting('member_details_' . $i, 'scroll'),
+    );
+  }
+  //end of team section
+  
   $filename = drupal_get_path('theme', 'scroll') . '/scroll.theme';
   $form_state->addBuildInfo('files', array($filename));
   // Custom submit to save the file permenant.
@@ -219,7 +349,7 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
   //Scroll 1..5 background images
   for($i=1; $i<=5; $i++) {
     // Load the file via file.fid.
-    if ($file = \Drupal\file\Entity\File::load($values["scroll_' . $i . '_image"][0])) {
+    if ($file = \Drupal\file\Entity\File::load($values["scroll_" . $i . "_image"][0])) {
       // Change status to permanent.
       $file->setPermanent();
       $file->save();
@@ -231,7 +361,31 @@ function scroll_settings_form_submit(&$form, \Drupal\Core\Form\FormStateInterfac
   //Slides 1..5 images
   for($i=1; $i<=5; $i++) {
     // Load the file via file.fid.
-    if ($file = \Drupal\file\Entity\File::load($values["slide_' . $i . '_image"][0])) {
+    if ($file = \Drupal\file\Entity\File::load($values["slide_" . $i . "_image"][0])) {
+      // Change status to permanent.
+      $file->setPermanent();
+      $file->save();
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage->add($file, 'user', 'user', $account->id());
+    }
+  }
+  
+  //Articles 1..4 images
+  for($i=1; $i<=4; $i++) {
+    // Load the file via file.fid.
+    if ($file = \Drupal\file\Entity\File::load($values["article_picture_" . $i][0])) {
+      // Change status to permanent.
+      $file->setPermanent();
+      $file->save();
+      $file_usage = \Drupal::service('file.usage');
+      $file_usage->add($file, 'user', 'user', $account->id());
+    }
+  }
+  
+  //Member 1..4 images
+  for($i=1; $i<=4; $i++) {
+    // Load the file via file.fid.
+    if ($file = \Drupal\file\Entity\File::load($values["member_picture_" . $i][0])) {
       // Change status to permanent.
       $file->setPermanent();
       $file->save();
@@ -307,6 +461,7 @@ function scroll_preprocess_page(&$vars) {
   $vars['fixed_image'] = $fixed_image;
   $vars['background_type'] = theme_get_setting('background_type', 'scroll');
     
+  //set scroll regions backgrounds
   for($i=1; $i<=5; $i++) {    
     $vars[region_height][$i] = theme_get_setting('scroll_' . $i . '_height', 'scroll');
     //image attachment propertirs for every region background image
@@ -333,5 +488,35 @@ function scroll_preprocess_page(&$vars) {
         $vars['background_repeat'][$i] = 'repeat-y';
         break;
     }   
-  }   
+  }
+
+  //set articles section details
+  $vars['articles_setcion_title'] = theme_get_setting('articles_setcion_title', 'scroll');
+  $vars['articles_setcion_description'] = theme_get_setting('articles_setcion_description', 'scroll');
+  
+  for($i=1; $i<= 4; $i++) {
+    $fid = theme_get_setting('article_picture_' . $i, 'scroll');
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    if (!empty($file)) {
+      $uri = $file->getFileUri();
+      $vars['article_picture_' . $i] = file_create_url($uri);
+    }
+    
+    $vars['article_title_' . $i] = theme_get_setting('article_title_' . $i, 'scroll');
+    $vars['article_details_' . $i] = theme_get_setting('article_details_' . $i, 'scroll');
+  }
+  
+  //set member section details
+  for($i=1; $i<= 4; $i++) {
+    $fid = theme_get_setting('member_picture_' . $i, 'scroll');
+    $file = \Drupal\file\Entity\File::load($fid[0]);
+    if (!empty($file)) {
+      $uri = $file->getFileUri();
+      $vars['member_picture_' . $i] = file_create_url($uri);
+    }
+    
+    $vars['member_title_' . $i] = theme_get_setting('member_title_' . $i, 'scroll');
+    $vars['member_details_' . $i] = theme_get_setting('member_details_' . $i, 'scroll');
+  }
+  
 }

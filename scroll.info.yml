@@ -7,7 +7,7 @@ base theme: false
 libraries:
     - scroll/common
     - scroll/bootstrap
-    - scroll/owl_carousel
+    - scroll/slimmenu
 
 regions:
     header: 'Header'

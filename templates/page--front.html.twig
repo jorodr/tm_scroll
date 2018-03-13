@@ -47,26 +47,32 @@
 #}
 <div class="layout-container">
   {% if header_bg_color %}
-    <header role="banner" id="js-header" style = "background-color:rgba( {{header_bg_color}} )">
+    <header role="banner" id="js-header" style = "background-color:rgba( {{header_bg_color}} )">        
         {{ page.header }}
+        {{ page.primary_menu }}
     </header>
   {%else %}
     <header role="banner" id="js-header">
       {{ page.header }}
-      {# page.primary_menu #}
+      {{ page.primary_menu }}
     </header>
   {%endif %}
   
   <!-- Region Fixed -->
-  
-  {% if background_type == 1 %}
-    <div class ="fixed" style = "background-image:url('{{ fixed_image }}');
-            background-position:center;
+  {% if background_type == 0 %}
+      <div class ="fixed" id="fixed_none">        
+        {{ page.fixed }}
+      </div><!-- /fixed none -->
+  {% elseif background_type == 1 %}    
+    <div class ="fixed paralax" id = "fixed_image" data-speed="5" data-type="background" 
+            style = "background-image:url('{{ fixed_image }}');
+            background-position: 50% 0px;
             background-repeat:{{ background_repeat[1] }};
             background-size:cover;
             background-attachment:{{ background_attachment[1] }};
-            min-height:{{ region_height[1] }}px;">       
+            min-height:{{ region_height[1] }}px;">      
       {{ page.fixed }}
+    </div><!-- /fixed image -->
   {% elseif background_type == 2 %}
       <div class ="fixed">
         <div class="video">
@@ -75,7 +81,12 @@
               Your browser does not support the video tag.
             </video>
 	</div>
+        <div class ="fixed-video-front">
+            {{ page.fixed }}
+        </div>
+      </div><!-- /fixed video -->
   {% elseif background_type == 3 %}
+      {{ attach_library('scroll/owl_carousel') }}
       <div class ="fixed">
         <div id="owl-demo" class="owl-carousel owl-theme">
           <div  class = "carousel_background" id="image_1" style = "background:url('{{ slide_1_image }}')
@@ -109,11 +120,8 @@
              <!--<img src="{{ slide_3_image }}"/>-->
           </div>
         </div>
-  
-  {% endif %}
-  </div><!-- /fixed -->
-  
-  
+      </div><!-- /fixed slider-->
+  {% endif %}  
   
   <div class ='scroll'>
       {% if scroll_1_image %}
@@ -126,23 +134,56 @@
       {% else %}
           <div class ='scroll_1' style = "min-height:{{ region_height[1] }}px;">
       {% endif %}
+        <div class ="container-fluid member-section">            
+            <h2>{{ articles_setcion_title }}</h2>                
+            <p>
+               {{ articles_setcion_description }}
+            </p>            
+            <div class="row">
+                <div class ="article col-md-3">
+                    <a class = "article-picture" style ="background-image:url('{{ article_picture_1 }}')"></a>
+                    <h3>{{ article_title_1 }}</h3>                    
+                    <p>
+                        {{ article_details_1 }}
+                    </p>
+                </div>
+                <div class ="article col-md-3">
+                    <a class = "article-picture" style ="background-image:url('{{ member_picture_2 }}')"></a>
+                    <h3>{{ article_title_2 }}</h3>
+                    <p>
+                        {{ article_details_2 }}
+                    </p>
+                </div>
+                <div class ="article col-md-3">
+                    <a class = "article-picture" style ="background-image:url('{{ member_picture_3 }}')"></a>
+                    <h3>{{ article_title_3 }}</h3>
+                    <p>
+                        {{ article_details_3 }}
+                    </p>
+                </div>
+                <div class ="article col-md-3">
+                    <a class = "article-picture" style ="background-image:url('{{ member_picture_4 }}')"></a>
+                    <h3>{{ article_title_4 }}</h3>
+                    <p>
+                        {{ article_details_4 }}
+                    </p>
+                </div>
+            </div><!-- about-us row -->
+        </div><!-- articles container -->
         {{ page.scroll_1 }}
-        Region Scroll 1
       </div><!-- /scroll_1 -->
       
       {% if scroll_2_image %}
           <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
             background-position:bottom left;
             background-repeat:{{ background_repeat[2] }};
-            background-size:400px;
+            background-size:cover;
             background-attachment:{{ background_attachment[2] }};
             min-height:{{ region_height[2] }}px;">
       {% else %}
           <div class ='scroll_2' style = "min-height:{{ region_height[2] }}px;">
-      {% endif %}
-      
+      {% endif %}        
         {{ page.scroll_2 }}
-        Region Scroll 2
       </div><!-- /scroll_2 -->
       
       {% if scroll_3_image %}
@@ -156,7 +197,6 @@
           <div class ='scroll_3' style = "min-height:{{ region_height[3] }}px;">
       {% endif %}        
         {{ page.scroll_3 }}
-        Region Scroll 3
       </div><!-- /scroll_3 -->
       
       {% if scroll_4_image %}
@@ -168,9 +208,48 @@
             min-height:{{ region_height[4] }}px;">
       {% else %}
           <div class ='scroll_4' style = "min-height:{{ region_height[4] }}px;">
-      {% endif %}  
+      {% endif %}
+        <div class ="container-fluid member-section">            
+            <h2> SAMPLE TITLE</h2>                
+            <p>
+               This is sample text for new Scroll theme for Drupal 
+            </p>            
+            <div class="row">
+                <div class ="member col-md-3">
+                    <div class = "member-picture" style ="background-image:url('{{ member_picture_1 }}')">                        
+                    </div>
+                    <h3>{{ member_title_1 }}</h3>                    
+                    <p>
+                        {{ member_details_1 }}
+                    </p>
+                </div>
+                <div class ="member col-md-3">
+                    <div class = "member-picture" style ="background-image:url('{{ member_picture_2 }}')">
+                    </div>
+                    <h3>{{ member_title_2 }}</h3>
+                    <p>
+                        {{ member_details_2 }}
+                    </p>
+                </div>
+                <div class ="member col-md-3">
+                    <div class = "member-picture" style ="background-image:url('{{ member_picture_3 }}')"> 
+                    </div>
+                    <h3>{{ member_title_3 }}</h3>
+                    <p>
+                        {{ member_details_3 }}
+                    </p>
+                </div>
+                <div class ="member col-md-3">
+                    <div class = "member-picture" style ="background-image:url('{{ member_picture_4 }}')">
+                    </div>
+                    <h3>{{ member_title_4 }}</h3>
+                    <p>
+                        {{ member_details_4 }}
+                    </p>
+                </div>
+            </div><!-- about-us row -->
+        </div><!-- about-us container -->
         {{ page.scroll_4 }}
-        Region Scroll 4
       </div><!-- /scroll_4 -->
       
       {% if scroll_5_image %}
@@ -184,7 +263,6 @@
           <div class ='scroll_5' style = "min-height:{{ region_height[5] }}px;">
       {% endif %}  
         {{ page.scroll_5 }}
-        Region Scroll 5
       </div><!-- /scroll_5 -->
       
       {% if page.sidebar_first %}
@@ -202,7 +280,6 @@
       {% if page.footer %}
         <footer role="contentinfo">
           {{ page.footer }}
-          Footer
         </footer>
       {% endif %}
   </div><!-- /scroll -->
