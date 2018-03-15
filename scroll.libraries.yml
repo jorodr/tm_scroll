@@ -32,3 +32,10 @@ slimmenu:
         vendor/slimmenu/js/jquery.slimmenu.js: {}
     dependencies:
         - core/jquery
+        
+animate:
+    css:
+        theme:
+            vendor/animate/css/animate.css: {}
+    js:
+        vendor/animate/js/viewportchecker.js: {}

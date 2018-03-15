@@ -46,6 +46,7 @@
  */
 #}
 <div class="layout-container">
+  {{ attach_library('scroll/animate') }}
   {% if header_bg_color %}
     <header role="banner" id="js-header" style = "background-color:rgba( {{header_bg_color}} )">        
         {{ page.header }}
@@ -134,35 +135,37 @@
       {% else %}
           <div class ='scroll_1' style = "min-height:{{ region_height[1] }}px;">
       {% endif %}
-        <div class ="container-fluid member-section">            
-            <h2>{{ articles_setcion_title }}</h2>                
-            <p>
-               {{ articles_setcion_description }}
-            </p>            
-            <div class="row">
-                <div class ="article col-md-3">
-                    <a class = "article-picture" style ="background-image:url('{{ article_picture_1 }}')"></a>
+        <div class ="container-fluid articles-section">
+            <div class ="row {{ articles_title_animation }}">
+                <h2>{{ articles_section_title }}</h2>                
+                <p>
+                   {{ articles_section_description }}
+                </p> 
+            </div>                       
+            <div class="row {{ articles_section_animation }}">
+                <div class ="article col-sm-6 col-md-3">
+                    <a href ="{{ article_url_1 }}" class = "article-picture" style ="background-image:url('{{ article_picture_1 }}')"></a>
                     <h3>{{ article_title_1 }}</h3>                    
                     <p>
                         {{ article_details_1 }}
                     </p>
                 </div>
-                <div class ="article col-md-3">
-                    <a class = "article-picture" style ="background-image:url('{{ member_picture_2 }}')"></a>
+                <div class ="article col-sm-6 col-md-3">
+                    <a href ="{{ article_url_2 }}" class = "article-picture" style ="background-image:url('{{ article_picture_2 }}')"></a>
                     <h3>{{ article_title_2 }}</h3>
                     <p>
                         {{ article_details_2 }}
                     </p>
                 </div>
-                <div class ="article col-md-3">
-                    <a class = "article-picture" style ="background-image:url('{{ member_picture_3 }}')"></a>
+                <div class ="article col-sm-6 col-md-3">
+                    <a href ="{{ article_url_3 }}" class = "article-picture" style ="background-image:url('{{ article_picture_3 }}')"></a>
                     <h3>{{ article_title_3 }}</h3>
                     <p>
                         {{ article_details_3 }}
                     </p>
                 </div>
-                <div class ="article col-md-3">
-                    <a class = "article-picture" style ="background-image:url('{{ member_picture_4 }}')"></a>
+                <div class ="article col-sm-6 col-md-3">
+                    <a href ="{{ article_url_4 }}" class = "article-picture" style ="background-image:url('{{ article_picture_4 }}')"></a>
                     <h3>{{ article_title_4 }}</h3>
                     <p>
                         {{ article_details_4 }}
@@ -175,7 +178,7 @@
       
       {% if scroll_2_image %}
           <div class ='scroll_2' style = "background-image:url('{{ scroll_2_image }}');
-            background-position:bottom left;
+            background-position:top left;
             background-repeat:{{ background_repeat[2] }};
             background-size:cover;
             background-attachment:{{ background_attachment[2] }};
@@ -209,13 +212,16 @@
       {% else %}
           <div class ='scroll_4' style = "min-height:{{ region_height[4] }}px;">
       {% endif %}
-        <div class ="container-fluid member-section">            
-            <h2> SAMPLE TITLE</h2>                
-            <p>
-               This is sample text for new Scroll theme for Drupal 
-            </p>            
-            <div class="row">
-                <div class ="member col-md-3">
+        <div class ="container-fluid member-section">             
+            <div class ="row {{ members_title_animation }}">
+                <h2> SAMPLE TITLE</h2>                
+                <p>
+                   This is sample text for new Scroll theme for Drupal 
+                </p>
+            </div>
+                       
+            <div class="row {{ members_section_animation }}">                 
+                <div class ="member col-sm-6 col-md-3">
                     <div class = "member-picture" style ="background-image:url('{{ member_picture_1 }}')">                        
                     </div>
                     <h3>{{ member_title_1 }}</h3>                    
@@ -223,7 +229,7 @@
                         {{ member_details_1 }}
                     </p>
                 </div>
-                <div class ="member col-md-3">
+                <div class ="member col-sm-6 col-md-3">
                     <div class = "member-picture" style ="background-image:url('{{ member_picture_2 }}')">
                     </div>
                     <h3>{{ member_title_2 }}</h3>
@@ -231,7 +237,7 @@
                         {{ member_details_2 }}
                     </p>
                 </div>
-                <div class ="member col-md-3">
+                <div class ="member col-sm-6 col-md-3">
                     <div class = "member-picture" style ="background-image:url('{{ member_picture_3 }}')"> 
                     </div>
                     <h3>{{ member_title_3 }}</h3>
@@ -239,7 +245,7 @@
                         {{ member_details_3 }}
                     </p>
                 </div>
-                <div class ="member col-md-3">
+                <div class ="member col-sm-6 col-md-3">
                     <div class = "member-picture" style ="background-image:url('{{ member_picture_4 }}')">
                     </div>
                     <h3>{{ member_title_4 }}</h3>
@@ -280,7 +286,11 @@
       {% if page.footer %}
         <footer role="contentinfo">
           {{ page.footer }}
+          {{ page.highlighted }}
+          {{ page.help }}
         </footer>
       {% endif %}
+      
+      
   </div><!-- /scroll -->
 </div>{# /.layout-container #}

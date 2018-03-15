@@ -27,6 +27,21 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
                     var coords = '50% '+ yPos + 'px';
                     bg.css({ backgroundPosition: coords});
                 })
+                
+                $('.fade_in_left').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated fadeInLeft',
+                    offset: 10
+                });
+
+                $('.fade_in_right').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated fadeInRight',
+                    offset: 10
+                });
+
+                $('.fade_in_up').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated fadeInUp',
+                    offset: 10
+                });
             }
         })(); 
         
@@ -38,6 +53,8 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
             indentChildren: true,
             childrenIndenter: '&raquo;'
         });
+        
+        
     });
 }(jQuery);
     

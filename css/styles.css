@@ -1,3 +1,5 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Exo+2");
 html, body {
   margin: 0;
   padding: 0; }
@@ -6,13 +8,13 @@ header {
   width: 100%;
   position: fixed;
   z-index: 100;
-  height: 100px;
-  padding: 10px;
+  height: 80px;
+  padding: 20px;
   box-sizing: border-box;
   transition: all 0.3s;
   border-bottom: 1px solid #aaa; }
   header img {
-    height: 80px;
+    height: 40px;
     transition: all 0.3s; }
   header .main-menu {
     position: absolute;
@@ -22,7 +24,7 @@ header {
 header.smaller {
   height: 70px; }
   header.smaller img {
-    height: 50px; }
+    height: 30px; }
 
 .fixed {
   position: fixed;
@@ -58,17 +60,38 @@ header.smaller {
     text-align: center;
     padding-top: 60px; }
 
+.articles-section h3 {
+  text-align: center;
+  width: 100%; }
+.articles-section p {
+  text-align: center;
+  width: 100%; }
+.articles-section .article-picture {
+  display: block;
+  width: 180px;
+  height: 130px;
+  margin: 0 auto;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: 100%;
+  transition: all 0.3s; }
+  .articles-section .article-picture:hover {
+    background-size: 140%; }
+
 .member-section h2 {
   text-align: center;
-  margin: 30px 0; }
+  margin: 30px 0;
+  box-sizing: border-box;
+  width: 100%; }
 .member-section p {
   text-align: center;
-  margin: 10px 0; }
+  margin: 10px 0;
+  width: 100%; }
 .member-section .member {
   margin-top: 50px; }
   .member-section .member .member-picture {
-    width: 150px;
-    height: 150px;
+    width: 180px;
+    height: 180px;
     margin: 0 auto;
     border: 7px solid #ccc;
     border-radius: 50%;
@@ -106,5 +129,31 @@ footer {
     padding: 15px;
     border: 2px solid #fff;
     border-radius: 4px; }
+
+#webform-submission-contact-us-add-form {
+  width: 700px;
+  background-color: rgba(0, 0, 0, 0.5);
+  margin: 0 auto;
+  padding: 20px; }
+  #webform-submission-contact-us-add-form input, #webform-submission-contact-us-add-form textarea {
+    border-radius: 5px; }
+  #webform-submission-contact-us-add-form input {
+    display: block;
+    width: 290px;
+    margin: 20px;
+    box-sizing: border-box;
+    float: left; }
+  #webform-submission-contact-us-add-form input#edit-submit {
+    display: block;
+    margin: 0 auto; }
+  #webform-submission-contact-us-add-form textarea {
+    margin: 0 20px 20px 20px;
+    width: 620px; }
+
+#edit-actions input {
+  font-weight: bold;
+  width: 30%;
+  float: none;
+  margin: 20px auto; }
 
 /*# sourceMappingURL=styles.css.map */
