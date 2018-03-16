@@ -39,3 +39,9 @@ animate:
             vendor/animate/css/animate.css: {}
     js:
         vendor/animate/js/viewportchecker.js: {}
+        
+scroll_to:
+    js:
+        vendor/scroll_to/jquery.scrollTo.min.js: 
+    dependencies:
+        - core/jquery

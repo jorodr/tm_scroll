@@ -28,6 +28,11 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
                     bg.css({ backgroundPosition: coords});
                 })
                 
+                $('.fade_in').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated fadeIn',
+                    offset: 10
+                });
+                
                 $('.fade_in_left').addClass('hidden').viewportChecker({
                     classToAdd: 'visible animated fadeInLeft',
                     offset: 10
@@ -42,6 +47,42 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
                     classToAdd: 'visible animated fadeInUp',
                     offset: 10
                 });
+                
+                $('.fade_in_down').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated fadeInDown',
+                    offset: 10
+                });
+                
+                
+                $('.zoom_in').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated zoomIn',
+                    offset: 10
+                });
+                
+                $('.zoom_in_left').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated zoomInLeft',
+                    offset: 10
+                });
+                
+                $('.zoom_in_right').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated zoomInRight',
+                    offset: 10
+                });
+                
+                $('.zoom_in_down').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated zoomInDown',
+                    offset: 10
+                });
+                
+                $('.zoom_in_up').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated zoomInUp',
+                    offset: 10
+                });
+                
+                $('.roll_in').addClass('hidden').viewportChecker({
+                    classToAdd: 'visible animated rollIn',
+                    offset: 10
+                });
             }
         })(); 
         
@@ -54,7 +95,10 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
             childrenIndenter: '&raquo;'
         });
         
-        
+        //-- Scroll to       
+        $('#scroll-btn').on('click', function(e){
+            $.scrollTo('#scroll', 800);
+        });
     });
 }(jQuery);
     

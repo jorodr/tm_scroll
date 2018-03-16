@@ -73,6 +73,9 @@
             background-attachment:{{ background_attachment[1] }};
             min-height:{{ region_height[1] }}px;">      
       {{ page.fixed }}
+      <div id ="scroll-btn" class="animated infinite flash">
+          
+      </div>
     </div><!-- /fixed image -->
   {% elseif background_type == 2 %}
       <div class ="fixed">
@@ -124,7 +127,7 @@
       </div><!-- /fixed slider-->
   {% endif %}  
   
-  <div class ='scroll'>
+  <div class ='scroll' id = "scroll">
       {% if scroll_1_image %}
         <div class ='scroll_1' style = "background-image:url('{{ scroll_1_image }}');
             background-position:top left;
@@ -142,7 +145,7 @@
                    {{ articles_section_description }}
                 </p> 
             </div>                       
-            <div class="row {{ articles_section_animation }}">
+            <div class="row articles {{ articles_section_animation }}">
                 <div class ="article col-sm-6 col-md-3">
                     <a href ="{{ article_url_1 }}" class = "article-picture" style ="background-image:url('{{ article_picture_1 }}')"></a>
                     <h3>{{ article_title_1 }}</h3>                    
