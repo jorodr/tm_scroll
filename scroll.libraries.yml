@@ -5,6 +5,10 @@ common:
             css/colors.css: {}
     js:
         js/scroll.js: {}
+    dependencies:
+        - core/jquery
+        - scroll/slimmenu
+        - scroll/animate
         
 owl_carousel:
     css:

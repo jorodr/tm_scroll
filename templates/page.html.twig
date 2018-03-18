@@ -45,46 +45,48 @@
  * @ingroup themeable
  */
 #}
-<div class="layout-container">
-
-  <header role="banner">
-    {{ page.header }}
-  </header>
-
-  {{ page.primary_menu }}
-  {{ page.secondary_menu }}
-
-  {{ page.breadcrumb }}
-
-  {{ page.highlighted }}
-
+{% if header_bg_color %}
+    <header id="js-header" style = "background-color:rgba( {{header_bg_color}} )">        
+        {{ page.header }}
+        {{ page.primary_menu }}
+    </header>
+{%else %}
+    <header id="js-header">
+      {{ page.header }}
+      {{ page.primary_menu }}
+    </header>
+{%endif %}
+      {{ page.highlighted }}
+<div class="page-article-content container-fluid">    
   {{ page.help }}
+  <div class ="row">
+    <main role="main" class='col-sm-12'>    
+      <div class="layout-content">
+        {{ page.content }}
+      </div>{# /.layout-content #}
 
-  <main role="main">
-    <a id="main-content" tabindex="-1"></a>{# link is in html.html.twig #}
+      {% if page.sidebar_first %}
+        <aside class="layout-sidebar-first" role="complementary">
+          {{ page.sidebar_first }}
+        </aside>
+      {% endif %}
 
-    <div class="layout-content">
-      {{ page.content }}
-    </div>{# /.layout-content #}
+      {% if page.sidebar_second %}
+        <aside class="layout-sidebar-second" role="complementary">
+          {{ page.sidebar_second }}
+        </aside>
+      {% endif %}
 
-    {% if page.sidebar_first %}
-      <aside class="layout-sidebar-first" role="complementary">
-        {{ page.sidebar_first }}
-      </aside>
+    </main>
+  </div><!-- main row -->
+  <div class ="row">
+    {% if page.footer %}
+      <footer role="contentinfo" class = 'col-sm-12'>
+        {{ page.footer }}
+      </footer>
     {% endif %}
+  </div><!-- footer row -->
 
-    {% if page.sidebar_second %}
-      <aside class="layout-sidebar-second" role="complementary">
-        {{ page.sidebar_second }}
-      </aside>
-    {% endif %}
-
-  </main>
-
-  {% if page.footer %}
-    <footer role="contentinfo">
-      {{ page.footer }}
-    </footer>
-  {% endif %}
+  
 
 </div>{# /.layout-container #}

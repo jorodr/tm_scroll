@@ -26,6 +26,13 @@ header.smaller {
   header.smaller img {
     height: 30px; }
 
+main, footer {
+  width: 100%;
+  float: left; }
+
+.page-article-content {
+  padding-top: 100px; }
+
 .fixed {
   position: fixed;
   width: 100%;
@@ -179,5 +186,10 @@ footer {
   width: 30%;
   float: none;
   margin: 20px auto; }
+
+.fadeIn, .fadeInLeft, .fadeInRight, .fadeInUp, .fadeInDown,
+.zoomIn, .zoomInLeft, .zoomInRight, .zoomInDown, .zoomInUp,
+.rollIn {
+  animation-delay: 0.5s; }
 
 /*# sourceMappingURL=styles.css.map */

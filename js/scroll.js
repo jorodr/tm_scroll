@@ -33,53 +33,53 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
                     offset: 10
                 });
                 
-                $('.fade_in_left').addClass('hidden').viewportChecker({
+                $('.fade_in_left').viewportChecker({
                     classToAdd: 'visible animated fadeInLeft',
                     offset: 10
                 });
 
-                $('.fade_in_right').addClass('hidden').viewportChecker({
+                $('.fade_in_right').viewportChecker({
                     classToAdd: 'visible animated fadeInRight',
                     offset: 10
                 });
 
-                $('.fade_in_up').addClass('hidden').viewportChecker({
+                $('.fade_in_up').viewportChecker({
                     classToAdd: 'visible animated fadeInUp',
                     offset: 10
                 });
                 
-                $('.fade_in_down').addClass('hidden').viewportChecker({
+                $('.fade_in_down').viewportChecker({
                     classToAdd: 'visible animated fadeInDown',
                     offset: 10
                 });
                 
                 
-                $('.zoom_in').addClass('hidden').viewportChecker({
+                $('.zoom_in').viewportChecker({
                     classToAdd: 'visible animated zoomIn',
                     offset: 10
                 });
                 
-                $('.zoom_in_left').addClass('hidden').viewportChecker({
+                $('.zoom_in_left').viewportChecker({
                     classToAdd: 'visible animated zoomInLeft',
                     offset: 10
                 });
                 
-                $('.zoom_in_right').addClass('hidden').viewportChecker({
+                $('.zoom_in_right').viewportChecker({
                     classToAdd: 'visible animated zoomInRight',
                     offset: 10
                 });
                 
-                $('.zoom_in_down').addClass('hidden').viewportChecker({
+                $('.zoom_in_down').viewportChecker({
                     classToAdd: 'visible animated zoomInDown',
                     offset: 10
                 });
                 
-                $('.zoom_in_up').addClass('hidden').viewportChecker({
+                $('.zoom_in_up').viewportChecker({
                     classToAdd: 'visible animated zoomInUp',
                     offset: 10
                 });
                 
-                $('.roll_in').addClass('hidden').viewportChecker({
+                $('.roll_in').viewportChecker({
                     classToAdd: 'visible animated rollIn',
                     offset: 10
                 });

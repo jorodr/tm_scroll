@@ -139,13 +139,13 @@
           <div class ='scroll_1' style = "min-height:{{ region_height[1] }}px;">
       {% endif %}
         <div class ="container-fluid articles-section">
-            <div class ="row {{ articles_title_animation }}">
+            <div class ="row {{ articles_title_animation }} hidden">
                 <h2>{{ articles_section_title }}</h2>                
                 <p>
                    {{ articles_section_description }}
                 </p> 
             </div>                       
-            <div class="row articles {{ articles_section_animation }}">
+            <div class="row articles {{ articles_section_animation }} hidden">
                 <div class ="article col-sm-6 col-md-3">
                     <a href ="{{ article_url_1 }}" class = "article-picture" style ="background-image:url('{{ article_picture_1 }}')"></a>
                     <h3>{{ article_title_1 }}</h3>                    
@@ -216,14 +216,14 @@
           <div class ='scroll_4' style = "min-height:{{ region_height[4] }}px;">
       {% endif %}
         <div class ="container-fluid member-section">             
-            <div class ="row {{ members_title_animation }}">
+            <div class ="row {{ members_title_animation }} hidden">
                 <h2> SAMPLE TITLE</h2>                
                 <p>
                    This is sample text for new Scroll theme for Drupal 
                 </p>
             </div>
                        
-            <div class="row {{ members_section_animation }}">                 
+            <div class="row {{ members_section_animation }} hidden">                 
                 <div class ="member col-sm-6 col-md-3">
                     <div class = "member-picture" style ="background-image:url('{{ member_picture_1 }}')">                        
                     </div>
