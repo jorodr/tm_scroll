@@ -1,6 +1,6 @@
 common:
     css:
-        theme:
+        base:
             css/styles.css: {}
             css/colors.css: {}
     js:

@@ -72,6 +72,9 @@ main, footer {
 #fixed_none {
   padding-top: 100px; }
 
+.theme-content {
+  margin: 80px 0; }
+
 .scroll {
   width: 100%;
   float: left;
@@ -81,10 +84,24 @@ main, footer {
   .scroll .scroll_1, .scroll .scroll_2, .scroll .scroll_3, .scroll .scroll_4, .scroll .scroll_5, .scroll footer {
     width: 100%;
     float: left;
-    padding: 40px 0;
     box-sizing: border-box; }
   .scroll .scroll_1 {
     padding-top: 80px; }
+  .scroll .scroll_2 {
+    color: #fff; }
+    .scroll .scroll_2 .vertical-align {
+      display: flex;
+      align-items: center; }
+    .scroll .scroll_2 .left-column {
+      font-size: 300%; }
+    .scroll .scroll_2 .right-column {
+      font-size: 120%;
+      text-align: justify;
+      transition: all 0.3s;
+      padding: 20px;
+      box-sizing: border-box;
+      border-radius: 5px;
+      background-color: rgba(0, 0, 0, 0.5); }
 
 .articles-section h2, .articles-section h3 {
   text-align: center;
@@ -116,24 +133,22 @@ main, footer {
   text-align: center;
   margin: 10px 0;
   width: 100%; }
-.member-section .member {
-  margin-top: 50px; }
-  .member-section .member .member-picture {
-    width: 180px;
-    height: 180px;
-    margin: 0 auto;
-    border: 7px solid #ccc;
-    border-radius: 50%;
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: auto 100%;
-    filter: grayscale(100%);
-    transition: all 0.8s; }
-    .member-section .member .member-picture:hover {
-      background-size: auto 140%;
-      filter: grayscale(0%); }
-  .member-section .member h3, .member-section .member p {
-    text-align: center; }
+.member-section .member .member-picture {
+  width: 180px;
+  height: 180px;
+  margin: 0 auto;
+  border: 7px solid #ccc;
+  border-radius: 50%;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-size: auto 100%;
+  filter: grayscale(100%);
+  transition: all 0.8s; }
+  .member-section .member .member-picture:hover {
+    background-size: auto 140%;
+    filter: grayscale(0%); }
+.member-section .member h3, .member-section .member p {
+  text-align: center; }
 
 footer {
   min-height: 200px; }
@@ -180,6 +195,15 @@ footer {
   #webform-submission-contact-us-add-form textarea {
     margin: 0 20px 20px 20px;
     width: 620px; }
+
+#block-webform {
+  padding: 40px 0;
+  box-sizing: border-box; }
+  #block-webform h2 {
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    text-shadow: 2px 2px #000; }
 
 #edit-actions input {
   font-weight: bold;

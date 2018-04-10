@@ -28,7 +28,7 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
                     bg.css({ backgroundPosition: coords});
                 })
                 
-                $('.fade_in').addClass('hidden').viewportChecker({
+                $('.fade_in').viewportChecker({
                     classToAdd: 'visible animated fadeIn',
                     offset: 10
                 });
@@ -97,7 +97,7 @@ window.addEventListener('scroll', resizeHeaderOnScroll);
         
         //-- Scroll to       
         $('#scroll-btn').on('click', function(e){
-            $.scrollTo('#scroll', 800);
+            $.scrollTo('#scroll', 1600);
         });
     });
 }(jQuery);

@@ -67,8 +67,7 @@ main, footer{
     width: 60px;
     height: 60px;
     color:#fff;
-    position:absolute;
-    
+    position:absolute;    
     bottom:10%;
     left:0;
     right:0;
@@ -88,13 +87,17 @@ main, footer{
     }
 }
 
-    #fixed_image{
-        padding-top:100px;
-    }
+#fixed_image{
+    padding-top:100px;
+}
+
+#fixed_none{
+    padding-top:100px;
+}
     
-    #fixed_none{
-        padding-top:100px;
-    }
+.theme-content{
+    margin:80px 0;
+}
 
 .scroll{
     width:100%;
@@ -106,12 +109,34 @@ main, footer{
     .scroll_1, .scroll_2, .scroll_3, .scroll_4, .scroll_5, footer{
         width:100%;
         float:left;
-        padding:40px 0;
         box-sizing: border-box;
     }
     
     .scroll_1{       
         padding-top:80px;
+    }
+    
+    .scroll_2{
+        color:#fff;
+        
+        .vertical-align{
+            display: flex;
+            align-items: center;
+        }
+        
+        .left-column{
+            font-size:300%;
+        }
+        
+        .right-column{
+            font-size:120%;
+            text-align:justify;
+            transition:all 0.3s;
+            padding:20px;
+            box-sizing:border-box;
+            border-radius:5px;
+            background-color:rgba(0,0,0,0.5);
+        }
     }
 }
 
@@ -163,8 +188,6 @@ main, footer{
     }
     
     .member{
-        margin-top:50px;
-        
         .member-picture{
             width:180px;
             height:180px;
@@ -248,6 +271,18 @@ footer{
     textarea{
         margin:0 20px 20px 20px;
         width:620px;
+    }
+}
+
+#block-webform{
+    padding:40px 0;
+    box-sizing:border-box;
+    
+    h2{
+        text-align:center;
+        color:#fff;
+        font-weight:bold;
+        text-shadow: 2px 2px #000;
     }
 }
 

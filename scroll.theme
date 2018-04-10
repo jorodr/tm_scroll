@@ -16,9 +16,8 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
   
   //Header form elements
   $form['scroll']['header'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Header'),
-    '#collapsible' => FALSE,
   ); 
   $form['scroll']['header']['header_bg_color'] = array(
     '#type' => 'textfield',
@@ -28,25 +27,9 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#default_value' => theme_get_setting('header_bg_color', 'scroll'),
   );
   
-  $form['scroll']['header']['scroll_menu'] = array(
-    '#type' => 'fieldset',
-    '#title' => 'Scroll menu elements',
-    '#description' => t('The elements of the top menu scrolling to 5 scroll regions'),
-    '#collapsible' => FALSE,
-  );
-  
-  for($i=1; $i<=5; $i++) {
-    $form['scroll']['header']['scroll_menu']['menu_'.$i] = array(
-      '#type' => 'textfield',
-      '#title' => t('Title of '. $i . ' menu element'),
-      '#description' => t('This smenu element will scroll to ' . $i . ' region'),
-      '#size' => 30,
-    );
-  }  
-  
   // Fixed region form elements
   $form['scroll']['fixed'] = array(
-    '#type' => 'fieldset',
+    '#type' => 'details',
     '#title' => t('Fixed region'),
     '#collapsible' => FALSE,
   ); 
@@ -150,7 +133,7 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
   for($i=1; $i<=5;$i++) {
     $form["scroll"]["scroll_" . $i] = array(
       '#type' => 'details',
-      '#title' => 'Scroll ' . $i . ' Region detailss',
+      '#title' => 'Scroll ' . $i . ' Region details',
       '#description' => t('Settings for the top of the scroll regions'),
       '#collapsible' => TRUE,
       '#collapsed' => TRUE,
@@ -197,6 +180,23 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     );
   }
   // end of region details loop
+  
+  /*
+   * Scroll 2 text elements
+   */
+  $form['scroll']['scroll_2']['scroll_2_title'] = array(
+    '#type' => 'text_format',
+    '#format' => 'basic_html',
+    '#title' => t('Title'),
+    '#default_value' => theme_get_setting('scroll_2_title', 'scroll')['value'],
+  );
+  
+  $form['scroll']['scroll_2']['scroll_2_text'] = array(
+    '#type' => 'text_format',
+    '#format' => 'basic_html',
+    '#title' => t('Title'),
+    '#default_value' => theme_get_setting('scroll_2_text', 'scroll')['value'],
+  );
   
   /*
    * Articles section info
@@ -262,14 +262,14 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
     '#type' => 'textfield',
     '#title' => t('Title'),
     '#description' => t('Type the title of the Articles section'),
-    '#default_value' => theme_get_setting('articles_setcion_title', 'scroll'),
+    '#default_value' => theme_get_setting('articles_section_title', 'scroll'),
   );
   
   $form['scroll']['articles']['articles_section_description'] = array(
     '#type' => 'textarea',
     '#title' => t('Description'),
     '#description' => t('The additional text below the title of the Articles section'),
-    '#default_value' => theme_get_setting('articles_setcion_description', 'scroll'),
+    '#default_value' => theme_get_setting('articles_section_description', 'scroll'),
   );
   
   for($i=1; $i<=4; $i++) {
@@ -310,6 +310,7 @@ function scroll_form_system_theme_settings_alter(&$form, \Drupal\Core\Form\FormS
   }
   //end of articles section
   
+   
   /*
    * Team section info
    */
@@ -577,6 +578,10 @@ function scroll_preprocess_page(&$vars) {
     }   
   }
 
+  //set title and text for scoll 2 region
+  $vars['scroll_2_title'] = theme_get_setting('scroll_2_title', 'scroll')['value'];
+  $vars['scroll_2_text'] = theme_get_setting('scroll_2_text', 'scroll')['value'];
+  
   //set articles section details
   $vars['articles_section_title'] = theme_get_setting('articles_section_title', 'scroll');
   $vars['articles_section_description'] = theme_get_setting('articles_section_description', 'scroll');

@@ -188,7 +188,17 @@
             min-height:{{ region_height[2] }}px;">
       {% else %}
           <div class ='scroll_2' style = "min-height:{{ region_height[2] }}px;">
-      {% endif %}        
+      {% endif %}
+        <div class ='container'>
+            <div class ='row vertical-align theme-content'>
+                <div class ='left-column col-sm-12 col-md-5'>
+                    <p>{{ scroll_2_title|raw }}</p>
+                </div>
+                <div class ='right-column col-sm-12 col-md-7'>
+                    <p>{{ scroll_2_text|raw }}</p>
+                </div>
+            </div>
+        </div>
         {{ page.scroll_2 }}
       </div><!-- /scroll_2 -->
       
@@ -257,7 +267,7 @@
                     </p>
                 </div>
             </div><!-- about-us row -->
-        </div><!-- about-us container -->
+        </div><!-- member container -->       
         {{ page.scroll_4 }}
       </div><!-- /scroll_4 -->
       
@@ -270,7 +280,8 @@
             min-height:{{ region_height[5] }}px;">
       {% else %}
           <div class ='scroll_5' style = "min-height:{{ region_height[5] }}px;">
-      {% endif %}  
+      {% endif %}
+        
         {{ page.scroll_5 }}
       </div><!-- /scroll_5 -->
       
